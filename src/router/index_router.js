@@ -5,6 +5,7 @@ import Page_Forum from "../components/subpages/forum/forum.vue"
 import Page_AddNewPost from "../components/subpages/forum/addnewpost.vue"
 import Page_PostDetail from "../components/subpages/forum/postdetail.vue"
 import Page_News from "../components/subpages/news.vue"
+import Page_News_Blank from "../components/subpages/news_blank.vue"
 import Page_Login from "../components/subpages/me/login.vue"
 import Page_Register from "../components/subpages/me/register.vue"
 import Page_ME from "../components/subpages/me/me.vue"
@@ -33,6 +34,7 @@ const router = createRouter({
         {path:'/zsbbs/forum/addnewpost', component: Page_AddNewPost},
         {path:'/zsbbs/forum/postdetail', name: "postdetail", component: Page_PostDetail},
         {path:'/zsbbs/news', component: Page_News},
+        {path:'/zsbbs/news_blank', component: Page_News_Blank},
         {path:'/zsbbs/me/login', component: Page_Login},
         {path:'/zsbbs/me/register', component: Page_Register},
         {path:'/zsbbs/me', 

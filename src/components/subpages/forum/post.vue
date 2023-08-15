@@ -67,6 +67,40 @@
         </el-card>
         <div style="height:10px"></div>
     </div>
+    <div v-if="p_postType==2">
+        <el-card shadow="hover" style="width:90%; height:175px; margin:auto; background-color:rgb(250,250,250);" @click="seePostDetail">
+            <div style="display:flex; flex-direction:row; height:100%;">
+                <div style="width:100px;"/>
+                <!-- 帖子的标题和内容摘要 -->
+                <div style="display:flex; flex-direction:column; width:60%;">
+                    <div style="height: 0px;"></div>
+                    <el-text class="title" type="primary"><h1>标题: {{p_title}}</h1></el-text>
+                    <el-text class="content" truncated="true"><h3>内容: {{content}}</h3></el-text>
+                </div>
+                <!-- 帖子的次要信息 -->
+                <div style="display:flex; flex-direction:column; width:30%; height: 100%; margin:auto;">
+                    <div style="height: 0px;"></div>
+                    <el-text class="replycount" type="info">回复数: {{p_replycount}}</el-text>
+                    <div style="height: 5px;"></div>
+                    <el-text class="replycount" type="info">
+                            by:
+                            &nbsp;&nbsp;
+                            <el-avatar :size="40" :src="authoravatar" />
+                            &nbsp;&nbsp;
+                            {{authorname}}
+                    </el-text>
+                    <div style="height: 5px;"></div>
+                    <el-text class="replycount" type="info">发布于:&nbsp;&nbsp;{{p_publishtime}}</el-text>
+                    <div style="height: 5px;"></div>
+                    <el-text class="replycount" type="info">回复于:&nbsp;&nbsp;{{p_latestreplytime}}</el-text>
+                    <!-- <div style="height: 10px;"></div>
+                    <el-text class="replycount" type="info">Max Floor:&nbsp;&nbsp;{{p_maxfloor}}</el-text> -->
+                </div>
+            </div>
+                
+        </el-card>
+        <div style="height:10px"></div>
+    </div>
     
 </template>
 
@@ -78,7 +112,7 @@ export default {
         this.content = this.p_content.replace(/\\n/gm,"\n");
     },
     props:{
-        //0 是显示广场上的所有帖子  1 表示是用户发的帖子
+        //0 是显示广场上的所有帖子  1 表示是用户发的帖子  2表示是搜索出来的帖子
         p_postType: Number, 
 
         p_index: Number,

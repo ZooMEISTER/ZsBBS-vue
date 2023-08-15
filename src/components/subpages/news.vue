@@ -69,7 +69,7 @@
                     <text style="color: white; font-size: 30px;">最近在玩 :</text>
                     <div style="height: 30px;"></div>
                     <div style="">
-                        <iframe style="width: 96%; height: 500px;" src="//player.bilibili.com/player.html?aid=559040773&bvid=BV17e4y1S7on&cid=859789581&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                        <iframe style="width: 96%; height: 500px;" src="//player.bilibili.com/player.html?aid=559040773&bvid=BV17e4y1S7on&cid=859789581&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                     </div>
                 </div>
 
@@ -202,6 +202,7 @@
 <script>
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { getCurrentInstance } from 'vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -212,11 +213,17 @@ export default {
                 { url:require("../../assets/img/carousel/github.png") },
                 { url:require("../../assets/img/carousel/steam.png") },
                 { url:require("../../assets/img/carousel/tieba.png") },
-            ]
+            ],
+
         }
     },
     methods:{
-
+        toTop() {
+            document.documentElement.scrollTop = 0;
+        },
+    },
+    created(){
+        
     },
     mounted(){
         gsap.from(".ZAvatar", {y: 2000, duration: 1, ease: "power4.out", delay: 0.5});

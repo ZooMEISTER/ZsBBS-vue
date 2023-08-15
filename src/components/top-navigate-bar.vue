@@ -12,7 +12,7 @@
     >
 		<div style="width:20px"/>
 		<el-menu-item index="/zsbbs/main" style="height:100%">主页</el-menu-item>
-		<el-menu-item index="/zsbbs/news" style="height:100%">ZooMEISTER</el-menu-item>
+		<el-menu-item index="/zsbbs/news_blank" style="height:100%">ZooMEISTER</el-menu-item>
 		<el-menu-item index="/zsbbs/forum" style="height:100%">论坛</el-menu-item>
 		<div class="flex-grow" />
 
