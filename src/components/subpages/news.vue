@@ -30,7 +30,7 @@
                 <div style="height: 50px"></div>
 
                 <!-- 走马灯 -->
-                <el-carousel :interval="5000" type="card" style="margin: auto; width: 90%;">
+                <el-carousel :interval="5000" type="card" style="margin: auto; width: 90%;" arrow="never">
                     <el-carousel-item v-for="item in carouselImgwrap" :key="item" style="height: 270px; width: 480px;">
                         <img :src="item.url" style="height: 270px; width: 480px;" alt=""/>
                     </el-carousel-item>
@@ -60,12 +60,27 @@
                     </text>
                 </div>
 
+                <div style="height: 200px;"></div>
+
+                <!-- 最近在玩 -->
+                <div>
+                    <text style="color: white; font-size: 30px;">ZooMEISTER : 一名玩家</text>
+                    <div></div>
+                    <text style="color: white; font-size: 30px;">最近在玩 :</text>
+                    <div style="height: 30px;"></div>
+                    <div style="">
+                        <iframe style="width: 96%; height: 500px;" src="//player.bilibili.com/player.html?aid=559040773&bvid=BV17e4y1S7on&cid=859789581&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    </div>
+                </div>
+
                 <div style="height: 100px;"></div>
 
-                <text style="color: white; font-size: 30px; width: 90%;"> 学习历程 : </text>
+                <text style="color: white; font-size: 30px;">ZooMEISTER : 一个偶尔学习的人</text>
+                <div></div>
+                <text style="color: white; font-size: 30px; width: 90%;"> 部分学习实践历程 : </text>
                 <div style="height: 30px;"></div>
                 <!-- Github时间线 -->
-                <el-timeline style="width: 100%;">
+                <el-timeline style="width: 100%; text-align: left;">
                     <el-timeline-item timestamp="2018/4" placement="top">
                         <div style="display: flex; flex-direction: row;">
                             <el-card class="ZGithubTimelineCard">
@@ -138,6 +153,36 @@
                                 <text style="font-size: 30px; color: white;"></text>
                                 <el-link href="">
                                     <text style="font-size: 20px; color: white;">mySeckill 介绍</text>
+                                </el-link>
+                            </div>
+                        </div>
+                    </el-timeline-item>
+                    <el-timeline-item timestamp="2023/5" placement="top">
+                        <div style="display: flex; flex-direction: row;">
+                            <el-card class="ZGithubTimelineCard">
+                                <text class="ZGithubTimelineTitle">myCalendar</text>
+                                <div></div>
+                                <text class="ZGithubTimelineDescription">日历 APP</text>
+                            </el-card>
+                            <div style="margin: auto;">
+                                <text style="font-size: 30px; color: white;"></text>
+                                <el-link href="">
+                                    <text style="font-size: 20px; color: white;">myCalendar 介绍</text>
+                                </el-link>
+                            </div>
+                        </div>
+                    </el-timeline-item>
+                    <el-timeline-item timestamp="2023/5" placement="top">
+                        <div style="display: flex; flex-direction: row;">
+                            <el-card class="ZGithubTimelineCard">
+                                <text class="ZGithubTimelineTitle">ZsBBS</text>
+                                <div></div>
+                                <text class="ZGithubTimelineDescription">个人网站</text>
+                            </el-card>
+                            <div style="margin: auto;">
+                                <text style="font-size: 30px; color: white;"></text>
+                                <el-link href="">
+                                    <text style="font-size: 20px; color: white;">源码见 Github</text>
                                 </el-link>
                             </div>
                         </div>
@@ -290,7 +335,7 @@ export default {
     font-size: 20px;
 }
 .ZGithubTimelineCard{
-    width: 50%;
+    width: 40%;
     background: rgba(255, 255, 255, 0);
 }
 .ZGithubTimelineTitle{
