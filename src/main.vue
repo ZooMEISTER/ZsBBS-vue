@@ -24,7 +24,7 @@ import TopNavigateBar from "./components/top-navigate-bar.vue"
 export default {
     name: 'App',
     created(){
-        this.$message.info("-- APP CREATED --")
+        //this.$message.info("-- APP CREATED --")
 
         //在这里执行用户的自动登录
         this.autoLogin()

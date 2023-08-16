@@ -24,6 +24,7 @@
                         前端：Vue 3 + VueX + VueRouter + GSAP + Element UI <br>
                         后端：Springboot + Mybatis Plus + Mysql <br>
                         开发工具：VSCode + Idea + Navicat <br>
+                        部署：阿里云ECS + CentOS + Nginx <br>
                         <br>
                         登录使用 JWT 方案 <br>
                         <br>
@@ -71,7 +72,7 @@ export default {
     font-size: 50px;
 }
 .ZImg{
-    height: 500px;
-    width: 500px;
+    height: 40%;
+    width: 40%;
 }
 </style>

@@ -17,6 +17,7 @@ import VueCookies from 'vue-cookies'
 
 import './layout/breadcrumb.css'
 
+//axios.defaults.baseURL = "http://47.97.8.13:8088"
 axios.defaults.baseURL = "http://localhost:8088"
 
 const app = createApp(App)

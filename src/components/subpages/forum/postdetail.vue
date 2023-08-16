@@ -164,9 +164,9 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 
 export default {
     created(){
-        //创建时获取数据
+        //创建时获取数据(获取帖子1楼的图片也是在这里面)
         this.getRouterData()
-        this.getContainImage()
+        //this.getContainImage()
         this.toTop()
         this.getAllReply()
     },
@@ -250,6 +250,10 @@ export default {
                 _this.content = response.data.content,
                 _this.replycount = response.data.replycount,
                 _this.publishtime = response.data.publishtime
+                _this.containimage = response.data.containimage
+
+                //获取帖子一楼的图片
+                _this.getContainImage()
 
                 _this.content = _this.content.replace(/\\n/gm,"\n");
 
@@ -318,6 +322,7 @@ export default {
         },
         //获取帖子的图片数据
         getContainImage(){
+            console.log("img data222")
             if(this.containimage > 0){
                 console.log("containimage " + this.containimage)
                 
@@ -332,6 +337,7 @@ export default {
                 .then(function (response) {
                     _this.allImage = response.data
 
+                    console.log("img data")
                     console.log(response.data);
                 })
                 .catch(function (error) {
@@ -471,14 +477,14 @@ export default {
             console.log(file)
 
             const isJPG = (file.raw.type === 'image/jpeg') || (file.raw.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 10;
+            const isLt2M = file.size / 1024 / 1024 < 4;
 
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 或 png 格式!');
                 fileList.splice(fileList.length - 1, 1)
             }
             else if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 10MB!');
+                this.$message.error('上传图片大小不能超过 4MB!');
                 fileList.splice(fileList.length - 1, 1)
             }
             else{

@@ -142,14 +142,14 @@ export default {
             console.log(file)
 
             const isJPG = (file.raw.type === 'image/jpeg') || (file.raw.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 10;
+            const isLt2M = file.size / 1024 / 1024 < 4;
 
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 或 png 格式!');
                 fileList.splice(fileList.length - 1, 1)
             }
             else if (!isLt2M) {
-                this.$message.error('上传图片大小不能超过 10MB!');
+                this.$message.error('上传图片大小不能超过 4MB!');
                 fileList.splice(fileList.length - 1, 1)
             }
             else{

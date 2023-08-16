@@ -13,10 +13,11 @@
                     <!-- <el-image style="width: 150px; height: 150px" :src="avatar" :fit="fit" /> -->
                     <el-upload
                         class="avatar-uploader"
-                        action="http://localhost:8088/upload/avatar"
+                        action=""
+                        :auto-upload="false"
                         :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload"
+
+                        :on-change="handleChange"
                         >
                         <img v-if="avatar" :src="avatar" class="avatar" />
                         <img v-else src="../../../assets/defaultavatar.png" class="avatar"/>
@@ -56,6 +57,7 @@ export default {
             password: "",
             userpostcount: 0,
             userreplycount: 0,
+            token: "",
         }
     },
     methods:{
@@ -70,40 +72,10 @@ export default {
                 userpostcount: this.userpostcount,
                 userreplycount: this.userreplycount,
             })
-        },
-        //注册方法
-        // getAvatarAndLogin(){
-        //     if(this.modifyavatar == 1){
-        //         //如果用户自定义了头像
-        //         this.loginMethod()
-        //     }
-        //     else{
-        //         //如果用户未自定义头像
-        //         var _this = this
 
-        //         this.avatarfile = new File([Blob], "../../../assets/logo.png")
-        //         if(this.avatarfile == null) console.log("avatarfile is null")
-        //         //上传用户头像请求
-        //         var formData = new FormData()
-        //         formData.append("userid", 0)
-        //         formData.append("avatar", this.avatarfile.raw)
-        //         axios.post(
-        //             '/upload/avatar', 
-        //             formData, 
-        //             {
-        //                 "Content-Type": "multipart/form-data;charset=utf-8"
-        //             }
-        //         ).then(function (response) {
-        //             _this.avatar = "http://localhost:8088/" + response.data
-        //             console.log("http://localhost:8088" + response.data);
-        //             _this.loginMethod()
-        //         })
-        //         .catch(function (error) {
-        //             console.log(error);
-        //         });
-        //         console.log(this.avatar)
-        //     }
-        // },
+            //将返回的token写入到cookie
+            this.$cookies.set("zsbbsLoginToken", this.token, -1)
+        },
         
         containSpace(str){
             if(str.indexOf(" ") == -1) return false
@@ -157,6 +129,7 @@ export default {
                         _this.userid = response.data.data.userid
                         _this.usertype = response.data.data.usertype
                         _this.$store.commit('syncStoreToken', {token: response.data.data.token})
+                        _this.token = response.data.data.token
                         _this.logInSuccess()
                         _this.$router.push('/zsbbs/main')
                     }
@@ -176,28 +149,29 @@ export default {
             this.username = ""
             this.password = ""
         },
-        //选中头像前调用
-        beforeAvatarUpload(file) {
-            const isJPG = (file.type === 'image/jpeg') || (file.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 2;
+
+        handleChange(file){
+            console.log("ttttt")
+            console.log(file)
+
+            //头像 格式 大小 检查
+            const isJPG = (file.raw.type === 'image/jpeg') || (file.raw.type === 'image/png');
+            const isLt400k = file.raw.size / 1024 <= 400;
 
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 或 png 格式!');
+                return;
             }
-            if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+            if (!isLt400k) {
+                this.$message.error('上传头像图片大小不能超过 400KB!');
+                return;
             }
-            return isJPG && isLt2M;
-        },
-        //选中头像后调用
-        handleAvatarSuccess(res, file) {
-            //this.avatar = URL.createObjectURL(file.raw)
-            this.avatarfile = file
+            
+            //将头像转为base64 并保存到avatar变量中
+            //this.avatarfile = file
             var _this = this
 
-            //上传用户头像请求
             var reader = new FileReader();
-            //将头像转成base64
             var blobFile = new Blob([file.raw])
             reader.readAsDataURL(blobFile)
             reader.onload = function () {
@@ -205,26 +179,8 @@ export default {
                 _this.avatar = this.result
             }
 
-            
-            // var formData = new FormData()
-            // formData.append("userid", 0)
-            // formData.append("avatar", this.avatarfile.raw)
-            // axios.post(
-            //     '/upload/avatar', 
-            //     formData, 
-            //     {
-            //         "Content-Type": "multipart/form-data;charset=utf-8"
-            //     }
-            // ).then(function (response) {
-            //     _this.avatar = "http://localhost:8088/" + response.data
-            //     _this.modifyavatar = 1
-            //     console.log("http://localhost:8088" + response.data);
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // });
-            // console.log(this.avatar)
-        }
+        },
+
     }
 }
 </script>

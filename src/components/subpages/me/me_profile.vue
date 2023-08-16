@@ -12,10 +12,11 @@
                 <el-form-item label="头像 ">
                     <el-upload
                         class="avatar-uploader"
-                        action="http://localhost:8088/upload/avatar"
+                        action=""
+                        :auto-upload="false"
                         :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload"
+
+                        :on-change="handleChange"
                         >
                         <img :src="avatar" class="avatar" />
                     </el-upload>
@@ -119,28 +120,28 @@ export default {
         }
     },
     methods:{
-        //更改头像前调用
-        beforeAvatarUpload(file) {
-            const isJPG = (file.type === 'image/jpeg') || (file.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 2;
+        handleChange(file){
+            console.log("ttttt")
+            console.log(file)
+
+            //头像 格式 大小 检查
+            const isJPG = (file.raw.type === 'image/jpeg') || (file.raw.type === 'image/png');
+            const isLt400k = file.raw.size / 1024 <= 400;
 
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 或 png 格式!');
+                return;
             }
-            if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+            if (!isLt400k) {
+                this.$message.error('上传头像图片大小不能超过 400KB!');
+                return;
             }
-            return isJPG && isLt2M;
-        },
-        //更改头像后调用
-        handleAvatarSuccess(res, file) {
-            //this.avatar = URL.createObjectURL(file.raw)
-            this.avatarfile = file
+            
+            //将头像转为base64 并保存到avatar变量中
+            //this.avatarfile = file
             var _this = this
 
-            //上传用户头像请求
             var reader = new FileReader();
-            //将头像转成base64
             var blobFile = new Blob([file.raw])
             reader.readAsDataURL(blobFile)
             reader.onload = function () {
@@ -148,6 +149,7 @@ export default {
                 _this.avatar = this.result
                 _this.userChangeAvatar = true
             }
+
         },
         containSpace(str){
             if(str.indexOf(" ") == -1) return false
